@@ -1,0 +1,65 @@
+<div class="p-2" *ngIf="users">
+  <div class="example-container p-2 border">
+    <h2>To do</h2>
+
+    <div
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="todo"
+      [cdkDropListConnectedTo]="[doneList,noNeedList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <app-card
+        *ngFor="let item of todo"
+        [item]="item"
+        [users]="users"
+        (changeAuthor)="onChangeAuthor($event)">
+      </app-card>
+    </div>
+  </div>
+
+  <div class="example-container p-2 border">
+    <h2>Done</h2>
+
+    <div
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="done"
+      [cdkDropListConnectedTo]="[todoList,noNeedList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <app-card
+        *ngFor="let item of done"
+        [item]="item"
+        [users]="users"
+        (changeAuthor)="onChangeAuthor($event)">
+      </app-card>
+
+    </div>
+  </div>
+
+  <div class="example-container p-2 border">
+    <h2>No need</h2>
+
+    <div
+      cdkDropList
+      #noNeedList="cdkDropList"
+      [cdkDropListData]="noNeed"
+      [cdkDropListConnectedTo]="[todoList,doneList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <app-card
+        *ngFor="let item of noNeed"
+        [item]="item"
+        [users]="users"
+        (changeAuthor)="onChangeAuthor($event)">
+      </app-card>
+
+    </div>
+  </div>
+</div>
+
+<div>{{currentMessage | async | json}}</div>

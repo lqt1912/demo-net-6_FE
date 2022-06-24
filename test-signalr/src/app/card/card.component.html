@@ -1,0 +1,75 @@
+<div class="example-box row pr-0" cdkDrag *ngIf="item">
+  <div class="col-12 row pr-0">
+    <div class="col-10 pr-1 pl-1 ">
+      <table style="width: 100%;">
+        <tr>
+          <td style="text-align: left; vertical-align: top; width: 2%;font-weight: 600;">
+            <strong>{{ item.order + 1 }}</strong>.
+          </td>
+          <td>
+            <textarea class="form-control p-0 text-area-title"
+                      style=""
+                      cols="10"
+                      rows="3"
+                      [(ngModel)]="item.title"
+                      (ngModelChange)="onChangeAuthor(item)"
+            ></textarea>
+          </td>
+        </tr>
+      </table>
+
+
+    </div>
+    <div class="col-3 row p-0">
+      <strong class="col-6 mb-0 mt-1">Est.</strong>
+      <div class="col-6 p-0">
+
+        <input type="text" class="form-control border-0" [(ngModel)]="item.estimateValue"
+               (ngModelChange)="onChangeAuthor(item)">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group col-12 row mb-1">
+    <label class="col-4 col-form-label select-box  ">Card author</label>
+    <ng-select class="col-8 form-control "
+               [items]="users"
+               #select
+               labelForId="users"
+               bindLabel="displayName"
+               bindValue="id"
+               [(ngModel)]="item.cardAuthor"
+               [virtualScroll]="true"
+               (ngModelChange)="onChangeAuthor(item)"
+               (search)="onSearch($event)">
+
+      <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+        <span>{{item.displayName}}</span>
+        <br>
+        <span>{{item.userPrincipalName}}</span>
+      </ng-template>
+    </ng-select>
+  </div>
+
+
+  <div class="form-group col-12 row mb-1">
+    <label class="col-4 col-form-label select-box  ">Assigned to</label>
+    <ng-select class="col-8 form-control "
+               [items]="users"
+               #select
+               labelForId="users"
+               bindLabel="displayName"
+               bindValue="id"
+               [(ngModel)]="item.assignedTo"
+               [virtualScroll]="true"
+               (ngModelChange)="onChangeAuthor(item)"
+    (search)="onSearch($event)">
+
+      <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+        <span>{{item.displayName}}</span>
+        <br>
+        <span>{{item.userPrincipalName}}</span>
+      </ng-template>
+    </ng-select>
+  </div>
+</div>
